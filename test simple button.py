@@ -4,39 +4,6 @@
 
 import tkinter as tk
 
-root = tk.Tk()
-
-# Define a function
-def print_contents(event):
-        print("Hi. The current entry content is:",
-              contents.get())
-
-def button_print_contents(*args):
-        print("Hi. The current entry content is:",
-              contents.get())
-
-# Create and place widget
-entrythingy = tk.Entry()
-entrythingy.pack()
-
-# Create the application variable.
-contents = tk.StringVar()
-# Set it to some value.
-contents.set("this is a variable")
-# Tell the entry widget to watch this variable.
-entrythingy["textvariable"] = contents
-
-# Is "callback" incorrect terminology for this now?
-# Define a callback for when the user hits return.
-# It prints the current value of the variable.
-entrythingy.bind('<Key-Return>',
-                        print_contents)
-buttonthingy = tk.Button(text="button", command=button_print_contents).pack()
-
-root.mainloop()
-
-'''
-
 class App(tk.Frame):
     def __init__(self, master):
         super().__init__(master)
@@ -56,20 +23,21 @@ class App(tk.Frame):
         # It prints the current value of the variable.
         self.entrythingy.bind('<Key-Return>',
                              self.print_contents)
-    
-        #self.buildbutton(self)
-    
-    # Same error everywhere, this goes in hand with self.buildbutton above
-    #def buildbutton(self, *args):
-    #    self.buttonthingy = tk.Button(text="button", command=self.print_contents).pack()
+        
+        self.buttonthingy = tk.Button(text="button", command=self.button_print_contents).pack()
+
+    def button_print_contents(self, *args):
+        # but it does the same thing just with a different argument, is there a way to call the function print_contents and avoid the "event" error?
+        print("Hi. The current entry content is:",
+              self.contents.get())
 
     
     def print_contents(self, event):
         print("Hi. The current entry content is:",
-              self.contents.get())'''
+              self.contents.get())
 
-
-        #self.buildbutton(self)
+root = tk.Tk()
+myapp = App(root)               # sends root = tk.Frame back to the class App
 
 ################################################
         # IS IT FAILING BECAUSE IT CAN'T BE PART OF THE __init__(self, master)?
@@ -81,6 +49,6 @@ class App(tk.Frame):
         # TypeError: App.print_contents() missing 1 required positional argument: 'event'
         # self.buttonthingy = tk.Button(text="button", command=self.print_contents).pack()
 # still have the button on GUI and same error as calling within __init__ inside the class.
-#buttonthingy = tk.Button(text="button", command=print_contents).pack()
+#buttonthingy = tk.Button(text="button", command=myapp.print_contents).pack()
 
-#root.mainloop()
+myapp.mainloop()
