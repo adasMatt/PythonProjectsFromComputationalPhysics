@@ -1,6 +1,5 @@
 # ttk tutorial.py but with a button added.
-# in progress, haven't started besides copy/pasting from tutorial and adding note about where to potentially put the button.
-# 15Dec - Matt
+# 16Dec - Matt
 
 import tkinter as tk
 
@@ -38,17 +37,5 @@ class App(tk.Frame):
 
 root = tk.Tk()
 myapp = App(root)               # sends root = tk.Frame back to the class App
-
-################################################
-        # IS IT FAILING BECAUSE IT CAN'T BE PART OF THE __init__(self, master)?
-        # LET'S TRY ADDING A BUTTON TO DO THE SAME THING
-        # GUI starts, but clicking the button yields error:
-        # AppData\Local\Programs\Python\Python311\Lib\tkinter\__init__.py", line 1948, in __call__
-        # return self.func(*args)
-        #   ^^^^^^^^^^^^^^^^
-        # TypeError: App.print_contents() missing 1 required positional argument: 'event'
-        # self.buttonthingy = tk.Button(text="button", command=self.print_contents).pack()
-# still have the button on GUI and same error as calling within __init__ inside the class.
-#buttonthingy = tk.Button(text="button", command=myapp.print_contents).pack()
 
 myapp.mainloop()
